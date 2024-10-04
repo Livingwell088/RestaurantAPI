@@ -22,4 +22,8 @@ public class MenuServiceImpl implements MenuService{
     public List<Menu> getAllMenu() {
         return menuRepository.findAll();
     }
+
+    public void deleteMenu() {
+        menuRepository.deleteAll();
+    }
 }

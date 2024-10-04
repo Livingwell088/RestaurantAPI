@@ -9,4 +9,6 @@ public interface MenuService {
     public Menu saveMenu(Menu menu);
     public List<Menu> getAllMenu();
 
+    public void deleteMenu();
+
 }

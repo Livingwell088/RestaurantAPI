@@ -8,15 +8,16 @@ import jakarta.persistence.Id;
 public class Menu {
 
     @Id
-    private long id;
+    private String id;
 
-    private String name, size, category, price, spicy;
+    private String number, name, size, category, price, spicy;
 
     public Menu() {
     }
 
-    public Menu(long id, String name, String size, String category, String price, String spicy) {
+    public Menu(String id, String number, String name, String size, String category, String price, String spicy) {
         this.id = id;
+        this.number = number;
         this.name = name;
         this.size = size;
         this.category = category;
@@ -24,11 +25,11 @@ public class Menu {
         this.spicy = spicy;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -64,6 +65,14 @@ public class Menu {
         this.price = price;
     }
 
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     public String getSpicy() {
         return spicy;
     }
@@ -76,6 +85,7 @@ public class Menu {
     public String toString() {
         return "Menu{" +
                 "id=" + id +
+                ", number='" + number + '\'' +
                 ", name='" + name + '\'' +
                 ", size='" + size + '\'' +
                 ", category='" + category + '\'' +
