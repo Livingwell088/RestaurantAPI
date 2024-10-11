@@ -34,7 +34,7 @@ public class MenuController {
 
     @GetMapping(path = "/getMenu")
     public List<Menu> getAllMenu(){
-        menuService.deleteMenu();
+//        menuService.deleteMenu();
 
         BufferedReader reader = null;
         try {
