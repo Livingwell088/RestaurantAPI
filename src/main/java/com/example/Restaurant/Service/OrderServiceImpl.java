@@ -41,11 +41,21 @@ public class OrderServiceImpl implements OrderService{
     public Orders update(Orders orders) {
         if (orders.getId() == null) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
-                    "Cannot update a project with a null id.");
+                    "Cannot update a order with a null id.");
         }
         if (getById(orders.getId()).isEmpty()) {
             throw new EntityNotFoundException(String.format(
-                    "Cannot update the project with id %d because it does not exist.", orders.getId()));
+                    "Cannot update the order with id %d because it does not exist.", orders.getId()));
         }
         return orderRepository.saveAndFlush(orders);
-    }}
+    }
+
+    public void deleteOrders(Long orderId) throws RuntimeException {
+        Orders order = getById(orderId).orElseThrow(() -> new EntityNotFoundException(
+                String.format("Orders with id %d not found.", orderId)));
+
+        orderRepository.deleteById(orderId);
+        orderRepository.flush();
+    }
+
+}

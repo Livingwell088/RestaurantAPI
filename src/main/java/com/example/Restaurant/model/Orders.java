@@ -14,27 +14,27 @@ public class Orders {
 
 
     private String orderName;
-    private String orderPrice;
-    private String orderAmount;
-
-    private String quantity;
-
+    private Double orderPrice;
+    private Integer quantity;
 
     @ManyToOne
     @JoinColumn(name = "menu_id")
     private Menu item;
 
-    public Orders(Long id, String orderName, String orderPrice, String orderAmount, String quantity, Menu item) {
+    private String specialInstruction;
+
+    public Orders(Long id, String orderName, Double orderPrice, Integer quantity, Menu item, String specialInstruction) {
         this.id = id;
         this.orderName = orderName;
         this.orderPrice = orderPrice;
-        this.orderAmount = orderAmount;
         this.quantity = quantity;
         this.item = item;
+        this.specialInstruction = specialInstruction;
     }
 
     public Orders() {
     }
+
 
     public Long getId() {
         return id;
@@ -44,15 +44,11 @@ public class Orders {
         return orderName;
     }
 
-    public String getOrderPrice() {
+    public Double getOrderPrice() {
         return orderPrice;
     }
 
-    public String getOrderAmount() {
-        return orderAmount;
-    }
-
-    public String getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
@@ -60,16 +56,19 @@ public class Orders {
         return item;
     }
 
+    public String getSpecialInstruction() {
+        return specialInstruction;
+    }
 
     @Override
     public String toString() {
         return "Orders{" +
                 "id=" + id +
                 ", orderName='" + orderName + '\'' +
-                ", orderPrice='" + orderPrice + '\'' +
-                ", orderAmount='" + orderAmount + '\'' +
-                ", quantity='" + quantity + '\'' +
+                ", orderPrice=" + orderPrice +
+                ", quantity=" + quantity +
                 ", item=" + item +
+                ", specialInstruction='" + specialInstruction + '\'' +
                 '}';
     }
 }
