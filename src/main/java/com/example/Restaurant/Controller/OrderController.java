@@ -19,12 +19,6 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-//    public OrderController(OrderServiceImpl orderService){
-//        this.orderService = orderService;
-//    }
-
-
-
     @GetMapping(path = "/getOrders")
     public List<Orders> getAllOrders(){
 

@@ -11,4 +11,6 @@ public interface MenuService {
 
     public void deleteMenu();
 
+    List<Menu> findAllMenuByNumber(String menuNumber);
+
 }

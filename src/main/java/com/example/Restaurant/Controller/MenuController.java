@@ -59,4 +59,10 @@ public class MenuController {
 //        System.out.println(lines.get(0));
         return menuService.getAllMenu();
     }
+
+
+    @GetMapping(path = "numbers/{menuNumber}")
+    public List<Menu> getMenuByNumber(@PathVariable String menuNumber) {
+        return menuService.findAllMenuByNumber(menuNumber);
+    }
 }

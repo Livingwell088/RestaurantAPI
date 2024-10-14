@@ -26,4 +26,8 @@ public class MenuServiceImpl implements MenuService{
     public void deleteMenu() {
         menuRepository.deleteAll();
     }
+
+    public List<Menu> findAllMenuByNumber(String menuNumber) {
+        return menuRepository.findAllMenuByNumber(menuNumber);
+    }
 }
