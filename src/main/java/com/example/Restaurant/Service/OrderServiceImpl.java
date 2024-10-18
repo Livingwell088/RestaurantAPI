@@ -1,6 +1,7 @@
 package com.example.Restaurant.Service;
 
 import com.example.Restaurant.Repository.OrderRepository;
+import com.example.Restaurant.model.Menu;
 import com.example.Restaurant.model.Orders;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,30 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public Orders saveOrUpdate(Orders orders){
-        return orderRepository.save(orders);
+
+        if (orderRepository.existsByItemAndSpecialInstruction(orders.getItem(), orders.getSpecialInstruction())){
+            System.out.println("Duplicate");
+//            System.out.println(orderRepository.findAllByItemAndSpecialInstruction(orders.getItem(), orders.getSpecialInstruction()));
+
+            Optional<Orders> current = getById(orderRepository.findAllByItemAndSpecialInstruction(orders.getItem(), orders.getSpecialInstruction()));
+            Orders old = null;
+            if (current.isPresent()){
+                old = current.get();
+
+                old.setQuantity(old.getQuantity() + orders.getQuantity());
+                old.setOrderPrice(old.getOrderPrice() + orders.getOrderPrice());
+
+                System.out.println(old);
+            }
+            assert old != null;
+            return update(old);
+
+        }
+        else{
+            return orderRepository.save(orders);
+        }
+
+//        return orders;
     }
 
     public Optional<Orders> getById(Long id) {
@@ -56,6 +80,11 @@ public class OrderServiceImpl implements OrderService{
 
         orderRepository.deleteById(orderId);
         orderRepository.flush();
+    }
+
+    public boolean existByItem(Menu menu, String instructions){
+
+        return orderRepository.existsByItemAndSpecialInstruction(menu, instructions);
     }
 
 }

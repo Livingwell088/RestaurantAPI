@@ -1,6 +1,7 @@
 package com.example.Restaurant.Service;
 
 
+import com.example.Restaurant.model.Menu;
 import com.example.Restaurant.model.Orders;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface OrderService {
     Optional<Orders> getById(Long id);
 
     void deleteOrders(Long id);
+
+    boolean existByItem(Menu menu, String instructions);
 }

@@ -52,6 +52,12 @@ public class OrderController {
         orderService.deleteOrders(orderId);
     }
 
+//    @GetMapping(path = "/{id}")
+//    public Orders getOrder(@PathVariable Long id) {
+//        return orderService.getById(id).orElseThrow(() -> new EntityNotFoundException(
+//                String.format("Error: Project with id %d not found.", id)));
+//    }
+
 
 
 }

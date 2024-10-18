@@ -14,8 +14,8 @@ public class Orders {
 
 
     private String orderName;
-    private Double orderPrice;
-    private Integer quantity;
+    private double orderPrice;
+    private int quantity;
 
     @ManyToOne
     @JoinColumn(name = "menu_id")
@@ -23,7 +23,7 @@ public class Orders {
 
     private String specialInstruction;
 
-    public Orders(Long id, String orderName, Double orderPrice, Integer quantity, Menu item, String specialInstruction) {
+    public Orders(Long id, String orderName, double orderPrice, int quantity, Menu item, String specialInstruction) {
         this.id = id;
         this.orderName = orderName;
         this.orderPrice = orderPrice;
@@ -44,11 +44,11 @@ public class Orders {
         return orderName;
     }
 
-    public Double getOrderPrice() {
+    public double getOrderPrice() {
         return orderPrice;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
@@ -58,6 +58,30 @@ public class Orders {
 
     public String getSpecialInstruction() {
         return specialInstruction;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setOrderName(String orderName) {
+        this.orderName = orderName;
+    }
+
+    public void setOrderPrice(Double orderPrice) {
+        this.orderPrice = orderPrice;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setItem(Menu item) {
+        this.item = item;
+    }
+
+    public void setSpecialInstruction(String specialInstruction) {
+        this.specialInstruction = specialInstruction;
     }
 
     @Override
