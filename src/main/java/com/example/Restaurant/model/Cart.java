@@ -1,25 +1,100 @@
 package com.example.Restaurant.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 
-import java.util.ArrayList;
-import java.util.List;
 
+@Entity
 public class Cart {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @EqualsAndHashCode.Include
+    private Long id;
 
 
     private String orderName;
-    private Float orderPrice;
-    private Integer orderAmount;
+    private double orderPrice;
+    private int quantity;
 
-//    @JsonManagedReference(value = "order-items")
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "rateCard", cascade = CascadeType.ALL)
-//    private List<Menu> items = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "menu_id")
+    private Menu item;
+
+    private String specialInstruction;
+
+    public Cart(Long id, String orderName, double orderPrice, int quantity, Menu item, String specialInstruction) {
+        this.id = id;
+        this.orderName = orderName;
+        this.orderPrice = orderPrice;
+        this.quantity = quantity;
+        this.item = item;
+        this.specialInstruction = specialInstruction;
+    }
+
+    public Cart() {
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getOrderName() {
+        return orderName;
+    }
+
+    public double getOrderPrice() {
+        return orderPrice;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public Menu getItem() {
+        return item;
+    }
+
+    public String getSpecialInstruction() {
+        return specialInstruction;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setOrderName(String orderName) {
+        this.orderName = orderName;
+    }
+
+    public void setOrderPrice(Double orderPrice) {
+        this.orderPrice = orderPrice;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setItem(Menu item) {
+        this.item = item;
+    }
+
+    public void setSpecialInstruction(String specialInstruction) {
+        this.specialInstruction = specialInstruction;
+    }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "id=" + id +
+                ", orderName='" + orderName + '\'' +
+                ", orderPrice=" + orderPrice +
+                ", quantity=" + quantity +
+                ", item=" + item +
+                ", specialInstruction='" + specialInstruction + '\'' +
+                '}';
+    }
 }
+
+
