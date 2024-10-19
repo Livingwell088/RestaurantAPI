@@ -3,6 +3,7 @@ package com.example.Restaurant.Service;
 import com.example.Restaurant.Repository.OrderRepository;
 import com.example.Restaurant.model.Menu;
 import com.example.Restaurant.model.Cart;
+import com.example.Restaurant.model.Orders;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,5 +17,21 @@ import java.util.Optional;
 @Service
 public class OrderServiceImpl implements OrderService{
 
+    @Autowired
+    private OrderRepository orderRepository;
 
+    @Override
+    public Orders saveOrders(Orders orders) {
+        return orderRepository.saveAndFlush(orders);
+    }
+
+    @Override
+    public List<Orders> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
+    @Override
+    public void deleteAll() {
+        orderRepository.deleteAll();
+    }
 }

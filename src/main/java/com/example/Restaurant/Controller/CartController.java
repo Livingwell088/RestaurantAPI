@@ -53,6 +53,11 @@ public class CartController {
         cartService.deleteCarts(cartId);
     }
 
+    @DeleteMapping()
+    public void deleteAll() {
+        cartService.deleteAll();
+    }
+
 //    @GetMapping(path = "/{id}")
 //    public Carts getOrder(@PathVariable Long id) {
 //        return cartService.getById(id).orElseThrow(() -> new EntityNotFoundException(

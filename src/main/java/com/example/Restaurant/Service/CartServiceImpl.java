@@ -83,6 +83,11 @@ public class CartServiceImpl implements CartService{
         cartRepository.flush();
     }
 
+    public void deleteAll() {
+        cartRepository.deleteAll();
+        cartRepository.flush();
+    }
+
     public boolean existByItem(Menu menu, String instructions){
 
         return cartRepository.existsByItemAndSpecialInstruction(menu, instructions);

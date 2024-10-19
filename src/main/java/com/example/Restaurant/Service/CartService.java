@@ -19,5 +19,7 @@ public interface CartService {
 
     void deleteCarts(Long id);
 
+    void deleteAll();
+
     boolean existByItem(Menu menu, String instructions);
 }
