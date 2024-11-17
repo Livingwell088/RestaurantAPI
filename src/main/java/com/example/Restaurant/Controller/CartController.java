@@ -2,39 +2,39 @@ package com.example.Restaurant.Controller;
 
 import com.example.Restaurant.Service.CartService;
 import com.example.Restaurant.model.Cart;
+import com.example.Restaurant.model.CartItem;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-
 
 @RestController
 @RequestMapping(path = "/carts")
 @CrossOrigin(origins = "http://localhost:3000")
+//@SessionAttributes("cart")
 public class CartController {
-
 
     @Autowired
     private CartService cartService;
 
-    @GetMapping(path = "/getCarts")
-    public List<Cart> getAllCarts(){
+    @GetMapping(path = "/getCarts/{sessionId}")
+    public Cart getAllCarts(@PathVariable String sessionId){
 
-        return cartService.getAllCarts();
+        return cartService.getAllCarts(sessionId);
     }
 
     @PostMapping(path = "/add")
 //    @ResponseStatus(HttpStatus.CREATED)
-    public Long addOrder(@RequestBody Cart cart) {
-        return cartService.saveOrUpdate(cart).getId();
+    public String addCart(@RequestBody CartItem item) {
+        return cartService.addToCart(item).getCart_Id();
     }
 
+
     @PutMapping(path = "/{cartId}")
-    public void editOrder(@PathVariable Long cartId, @RequestBody Cart cart) {
-        if (!cartId.equals(cart.getId())) {
+    public void editCart(@PathVariable String cartId, @RequestBody Cart cart) {
+        if (!cartId.equals(cart.getCart_Id())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     "cartId in request URL and cartId in object body do not match");
         }
@@ -42,14 +42,14 @@ public class CartController {
     }
 
     @GetMapping(path = "/{id}")
-    public Cart getOrder(@PathVariable Long id) {
+    public Cart getCart(@PathVariable String id) {
         return cartService.getById(id).orElseThrow(() -> new EntityNotFoundException(
                 String.format("Error: Project with id %d not found.", id)));
     }
 
 
     @DeleteMapping(path ="/{cartId}")
-    public void deleteCarts(@PathVariable Long cartId) {
+    public void deleteCarts(@PathVariable String cartId) {
         cartService.deleteCarts(cartId);
     }
 
@@ -58,8 +58,15 @@ public class CartController {
         cartService.deleteAll();
     }
 
+    @GetMapping(path = "/generate")
+    public String generateCart() {
+        String generated = cartService.generateCart();
+        System.out.println(generated);
+        return generated;
+    }
+
 //    @GetMapping(path = "/{id}")
-//    public Carts getOrder(@PathVariable Long id) {
+//    public Carts getOrder(@PathVariable String id) {
 //        return cartService.getById(id).orElseThrow(() -> new EntityNotFoundException(
 //                String.format("Error: Project with id %d not found.", id)));
 //    }

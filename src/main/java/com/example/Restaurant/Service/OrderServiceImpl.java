@@ -1,37 +1,48 @@
-package com.example.Restaurant.Service;
-
-import com.example.Restaurant.Repository.OrderRepository;
-import com.example.Restaurant.model.Menu;
-import com.example.Restaurant.model.Cart;
-import com.example.Restaurant.model.Orders;
-import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
-import java.util.Optional;
-
-
-@Service
-public class OrderServiceImpl implements OrderService{
-
-    @Autowired
-    private OrderRepository orderRepository;
-
-    @Override
-    public Orders saveOrders(Orders orders) {
-        return orderRepository.saveAndFlush(orders);
-    }
-
-    @Override
-    public List<Orders> getAllOrders() {
-        return orderRepository.findAll();
-    }
-
-    @Override
-    public void deleteAll() {
-        orderRepository.deleteAll();
-    }
-}
+//package com.example.Restaurant.Service;
+//
+//import com.example.Restaurant.Repository.CartRepository;
+//import com.example.Restaurant.Repository.OrderRepository;
+//import com.example.Restaurant.model.Menu;
+//import com.example.Restaurant.model.Cart;
+//import com.example.Restaurant.model.Orders;
+//import jakarta.persistence.EntityNotFoundException;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.stereotype.Service;
+//import org.springframework.web.server.ResponseStatusException;
+//
+//import java.util.List;
+//import java.util.Optional;
+//
+//
+//@Service
+//public class OrderServiceImpl implements OrderService{
+//
+//    @Autowired
+//    private OrderRepository orderRepository;
+//
+//    @Autowired
+//    private CartRepository cartRepository;
+//
+//    @Override
+//    public Orders saveOrders(Orders orders) {
+//
+//        Orders current = orders;
+//
+////        current.setOrderItems(cartRepository.findAll());
+//
+//        System.out.println(cartRepository.findAll());
+////        cartRepository.deleteAll();
+//        return orderRepository.saveAndFlush(orders);
+//    }
+//
+//    @Override
+//    public List<Orders> getAllOrders() {
+//        return orderRepository.findAll();
+//    }
+//
+//    @Override
+//    public void deleteAll() {
+//        orderRepository.deleteAll();
+//    }
+//}

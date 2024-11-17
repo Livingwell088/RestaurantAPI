@@ -1,6 +1,7 @@
 package com.example.Restaurant.Service;
 
 import com.example.Restaurant.model.Cart;
+import com.example.Restaurant.model.CartItem;
 import com.example.Restaurant.model.Menu;
 
 import java.util.List;
@@ -9,17 +10,21 @@ import java.util.Optional;
 public interface CartService {
 
 
-    public List<Cart> getAllCarts();
+    public Cart getAllCarts(String sessionId);
+
+    public Cart addToCart(CartItem item);
 
     public Cart saveOrUpdate(Cart cart);
 
     Cart update(Cart cart);
 
-    Optional<Cart> getById(Long id);
+    Optional<Cart> getById(String id);
 
-    void deleteCarts(Long id);
+    void deleteCarts(String id);
 
     void deleteAll();
 
     boolean existByItem(Menu menu, String instructions);
+
+    String generateCart();
 }
