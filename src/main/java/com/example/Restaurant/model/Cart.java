@@ -15,10 +15,8 @@ public class Cart {
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String cart_Id;
 
-
-
-//    @OneToMany
-//    private List<CartItem> cartItems = new ArrayList<>();
+    @OneToMany
+    private List<CartItem> cartItems = new ArrayList<>();
 
     public String getCart_Id() {
         return cart_Id;
@@ -28,13 +26,13 @@ public class Cart {
         this.cart_Id = id;
     }
 
-//    public List<CartItem> getCartItems() {
-//        return cartItems;
-//    }
-//
-//    public void setCartItems(List<CartItem> cartItems) {
-//        this.cartItems = cartItems;
-//    }
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
 
 
     @Override

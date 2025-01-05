@@ -50,7 +50,7 @@ public class MenuController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println(line);
+//            System.out.println(line);
             String[] split = line.split(";");
             Menu current = new Menu(split[0], split[1], split[2], split[3], split[4], split[5], split[6] );
             add(current);

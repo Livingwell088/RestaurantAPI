@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping(path = "/carts")
@@ -20,7 +22,7 @@ public class CartController {
     private CartService cartService;
 
     @GetMapping(path = "/getCarts/{sessionId}")
-    public Cart getAllCarts(@PathVariable String sessionId){
+    public List<CartItem> getAllCarts(@PathVariable String sessionId){
 
         return cartService.getAllCarts(sessionId);
     }
@@ -38,8 +40,12 @@ public class CartController {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     "cartId in request URL and cartId in object body do not match");
         }
+
+        System.out.println("Editing CART!");
         cartService.update(cart);
     }
+
+
 
     @GetMapping(path = "/{id}")
     public Cart getCart(@PathVariable String id) {
@@ -48,9 +54,9 @@ public class CartController {
     }
 
 
-    @DeleteMapping(path ="/{cartId}")
-    public void deleteCarts(@PathVariable String cartId) {
-        cartService.deleteCarts(cartId);
+    @PostMapping(path ="/delete")
+    public void deleteCarts(@RequestBody CartItem item) {
+        cartService.deleteCarts(item);
     }
 
     @DeleteMapping()

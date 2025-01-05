@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface CartService {
 
 
-    public Cart getAllCarts(String sessionId);
+    public List<CartItem> getAllCarts(String sessionId);
 
     public Cart addToCart(CartItem item);
 
@@ -20,7 +20,7 @@ public interface CartService {
 
     Optional<Cart> getById(String id);
 
-    void deleteCarts(String id);
+    void deleteCarts(CartItem item);
 
     void deleteAll();
 
