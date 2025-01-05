@@ -16,7 +16,7 @@ public interface CartService {
 
     public Cart saveOrUpdate(Cart cart);
 
-    Cart update(Cart cart);
+    Cart update(CartItem item);
 
     Optional<Cart> getById(String id);
 

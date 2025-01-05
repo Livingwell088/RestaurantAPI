@@ -35,14 +35,14 @@ public class CartController {
 
 
     @PutMapping(path = "/{cartId}")
-    public void editCart(@PathVariable String cartId, @RequestBody Cart cart) {
-        if (!cartId.equals(cart.getCart_Id())) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT,
-                    "cartId in request URL and cartId in object body do not match");
-        }
-
-        System.out.println("Editing CART!");
-        cartService.update(cart);
+    public void editCart(@PathVariable String cartId, @RequestBody CartItem item) {
+//        if (!cartId.equals(cart.getCart_Id())) {
+//            throw new ResponseStatusException(HttpStatus.CONFLICT,
+//                    "cartId in request URL and cartId in object body do not match");
+//        }
+//
+//        System.out.println("Editing CART!");
+        cartService.update(item);
     }
 
 

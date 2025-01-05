@@ -150,16 +150,33 @@ public class CartServiceImpl implements CartService{
     }
 
     @Override
-    public Cart update(Cart cart) {
-//        if (cart.getId() == null) {
-//            throw new ResponseStatusException(HttpStatus.CONFLICT,
-//                    "Cannot update a cart with a null id.");
-//        }
-        if (getById(cart.getCart_Id()).isEmpty()) {
-            throw new EntityNotFoundException(String.format(
-                    "Cannot update the cart with id %d because it does not exist.", cart.getCart_Id()));
-        }
-        return cartRepository.saveAndFlush(cart);
+    public Cart update(CartItem item) {
+
+        System.out.println("EDIT");
+
+//        Optional<CartItem> currentItem = cartItemRepository.findById(item.getId());
+//        CartItem current = currentItem.get();
+//
+//        current = item;
+
+        cartItemRepository.saveAndFlush(item);
+        List<CartItem> items = cartItemRepository.findAllByCartId(item.getCartId());
+
+        System.out.println(items);
+
+
+        Optional<Cart> cart = cartRepository.findById(item.getCartId());
+        cart = cartRepository.findById(item.getCartId());
+
+        Cart newCart = cart.get();
+        newCart.setCartItems(items);
+
+        System.out.println(newCart.getCartItems());
+
+
+
+        cartRepository.saveAndFlush(newCart);
+        return new Cart();
     }
 
     public void deleteCarts(CartItem item) throws RuntimeException {
