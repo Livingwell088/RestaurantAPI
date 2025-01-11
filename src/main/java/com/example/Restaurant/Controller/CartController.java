@@ -27,6 +27,16 @@ public class CartController {
         return cartService.getAllCarts(sessionId);
     }
 
+    @GetMapping(path = "/getAllItems")
+    public List<CartItem> getAllItems() {
+        return cartService.getAllItems();
+    }
+
+    @GetMapping(path = "getAllCart")
+    public List<Cart> getAll(){
+        return cartService.getAll();
+    }
+
     @PostMapping(path = "/add")
 //    @ResponseStatus(HttpStatus.CREATED)
     public String addCart(@RequestBody CartItem item) {
@@ -45,6 +55,18 @@ public class CartController {
         cartService.update(item);
     }
 
+    @PostMapping(path = "cartLogin/{username}")
+    public String cartLogIn(@PathVariable String username, @RequestBody String cartId){
+
+        System.out.println("Cart Login");
+        System.out.println(username);
+        System.out.println(cartId);
+
+        cartService.cartLogin(cartId, username);
+
+        return "";
+    }
+
 
 
     @GetMapping(path = "/{id}")
@@ -57,6 +79,13 @@ public class CartController {
     @PostMapping(path ="/delete")
     public void deleteCarts(@RequestBody CartItem item) {
         cartService.deleteCarts(item);
+    }
+
+    @PostMapping(path = "/deleteCart/{cartId}")
+    public void deleteCart(@PathVariable String cartId){
+
+        cartService.deleteCartItems(cartId);
+//        cartService.deleteCart(cartId);
     }
 
     @DeleteMapping()

@@ -27,4 +27,15 @@ public interface CartService {
     boolean existByItem(Menu menu, String instructions);
 
     String generateCart();
+
+    public String cartLogin(String cartId, String username);
+
+    public List<Cart> getAll();
+
+
+    public void deleteCartItems(String cartId);
+
+    public void deleteCart(String cartId);
+
+    public List<CartItem> getAllItems();
 }

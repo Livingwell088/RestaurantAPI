@@ -15,7 +15,7 @@ public class Cart {
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String cart_Id;
 
-    @OneToMany
+    @OneToMany //(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> cartItems = new ArrayList<>();
 
     public String getCart_Id() {
@@ -39,7 +39,7 @@ public class Cart {
     public String toString() {
         return "Cart{" +
                 "cart_Id='" + cart_Id + '\'' +
-//                ", cartItems=" + cartItems +
+                ", cartItems=" + cartItems +
                 '}';
     }
 }
