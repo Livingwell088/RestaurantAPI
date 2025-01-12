@@ -10,17 +10,17 @@ import java.util.Optional;
 public interface CartService {
 
 
-    public List<CartItem> getAllCarts(String sessionId);
+    public List<CartItem> getCartItems(String sessionId);
 
-    public Cart addToCart(CartItem item);
+    public Cart addItemToCart(CartItem item);
 
     public Cart saveOrUpdate(Cart cart);
 
-    Cart update(CartItem item);
+    Cart updateCartItem(CartItem item);
 
-    Optional<Cart> getById(String id);
+    Optional<Cart> getCartById(String id);
 
-    void deleteCarts(CartItem item);
+    void deleteCartItem(CartItem item);
 
     void deleteAll();
 

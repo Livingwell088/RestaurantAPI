@@ -23,13 +23,8 @@ public class CartServiceImpl implements CartService{
     @Autowired
     private CartItemRepository cartItemRepository;
 
-//    @Autowired
-//    public OrderServiceImpl(CartRepository cartRepository) {
-//        this.cartRepository = cartRepository;
-//    }
-
     @Override
-    public List<CartItem> getAllCarts(String sessionId) {
+    public List<CartItem> getCartItems(String sessionId) {
 
         Optional<Cart> cart = cartRepository.findById(sessionId);
 
@@ -39,22 +34,21 @@ public class CartServiceImpl implements CartService{
         else{
             return new ArrayList<>();
         }
-//        return cartRepository.
     }
 
     @Override
-    public Cart addToCart(CartItem item) {
+    public Cart addItemToCart(CartItem item) {
 
         Optional<Cart> cart = cartRepository.findById(item.getCartId());
 
         if (cart.isPresent()){
-            System.out.println("Found");
+//            System.out.println("Found");
         }
         else{
             Cart current = new Cart();
             current.setCart_Id(item.getCartId());
             cartRepository.saveAndFlush(current);
-            System.out.println("Make One!");
+//            System.out.println("Make One!");
         }
 
         cart = cartRepository.findById(item.getCartId());
@@ -63,7 +57,7 @@ public class CartServiceImpl implements CartService{
         Long exist = cartItemRepository.findAllByItemAndSpecialInstruction(item.getCartId(), item.getItem(), item.getSpecialInstruction());
 
         if (exist != null){
-            System.out.println("Found Duplicate: " + cartItemRepository.findById(exist));
+//            System.out.println("Found Duplicate: " + cartItemRepository.findById(exist));
 
             CartItem currentItem = cartItemRepository.findById(exist).get();
             currentItem.setQuantity(currentItem.getQuantity() + item.getQuantity());
@@ -78,8 +72,8 @@ public class CartServiceImpl implements CartService{
 
         List<CartItem> items = cartItemRepository.findAllByCartId(item.getCartId());
 
-        System.out.println("Cart:" + cart.get().toString());
-        System.out.println("Cart Items: " + items);
+//        System.out.println("Cart:" + cart.get().toString());
+//        System.out.println("Cart Items: " + items);
 
 
         Cart newCart = cart.get();
@@ -119,50 +113,21 @@ public class CartServiceImpl implements CartService{
     public Cart saveOrUpdate(Cart cart){
 
         return cart;
-
-//        if (cartRepository.existsByItemAndSpecialInstruction(cart.getItem(), cart.getSpecialInstruction())){
-//            System.out.println("Duplicate");
-////            System.out.println(cartRepository.findAllByItemAndSpecialInstruction(carts.getItem(), carts.getSpecialInstruction()));
-//
-//            Optional<Cart> current = getById(cartRepository.findAllByItemAndSpecialInstruction(cart.getItem(), cart.getSpecialInstruction()));
-//            Cart old = null;
-//            if (current.isPresent()){
-//                old = current.get();
-//
-//                old.setQuantity(old.getQuantity() + cart.getQuantity());
-//                old.setOrderPrice(old.getOrderPrice() + cart.getOrderPrice());
-//
-//                System.out.println(old);
-//            }
-//            assert old != null;
-//            return update(old);
-//
-//        }
-//        else{
-//            return cartRepository.save(cart);
-//        }
-
-//        return carts;
     }
 
-    public Optional<Cart> getById(String id) {
+    public Optional<Cart> getCartById(String id) {
         return cartRepository.findById(id);
     }
 
     @Override
-    public Cart update(CartItem item) {
+    public Cart updateCartItem(CartItem item) {
 
-        System.out.println("EDIT");
-
-//        Optional<CartItem> currentItem = cartItemRepository.findById(item.getId());
-//        CartItem current = currentItem.get();
-//
-//        current = item;
+//        System.out.println("EDIT");
 
         cartItemRepository.saveAndFlush(item);
         List<CartItem> items = cartItemRepository.findAllByCartId(item.getCartId());
 
-        System.out.println(items);
+//        System.out.println(items);
 
 
         Optional<Cart> cart = cartRepository.findById(item.getCartId());
@@ -171,7 +136,7 @@ public class CartServiceImpl implements CartService{
         Cart newCart = cart.get();
         newCart.setCartItems(items);
 
-        System.out.println(newCart.getCartItems());
+//        System.out.println(newCart.getCartItems());
 
 
 
@@ -179,13 +144,14 @@ public class CartServiceImpl implements CartService{
         return new Cart();
     }
 
-    public void deleteCarts(CartItem item) throws RuntimeException {
 
-        System.out.println("Deleting");
-        System.out.println(item.toString());
+    public void deleteCartItem(CartItem item) throws RuntimeException {
+
+//        System.out.println("Deleting");
+//        System.out.println(item.toString());
 
         String cartId = item.getCartId();
-        Cart cart = getById(cartId).orElseThrow(() -> new EntityNotFoundException(
+        Cart cart = getCartById(cartId).orElseThrow(() -> new EntityNotFoundException(
                 String.format("Carts with id %d not found.", cartId)));
 
         Long currentId = cartItemRepository.findAllByItemAndSpecialInstruction(cartId, item.getItem(), item.getSpecialInstruction());
@@ -201,7 +167,6 @@ public class CartServiceImpl implements CartService{
             current.setOrderPrice(current.getQuantity() * Double.parseDouble(current.getItem().getPrice()));
 
             cartItemRepository.flush();
-//        cartRepository.deleteById(cartId);
         }
 
 
@@ -237,9 +202,9 @@ public class CartServiceImpl implements CartService{
 
             Optional<Cart> userCart = cartRepository.findById(username);
 
-            System.out.println(currentCart.toString());
+//            System.out.println(currentCart.toString());
             if (userCart.isEmpty()){
-                System.out.println("New User Cart");
+//                System.out.println("New User Cart");
 
 
                 Cart newCart = new Cart();
@@ -271,13 +236,13 @@ public class CartServiceImpl implements CartService{
                 currentCart.getCartItems().removeIf(cartItem -> cartItem.getCartId().equals(cartId));
 
                 cartItems = cartItemRepository.findAllByCartId(cartId);
-                System.out.println(cartItems);
+//                System.out.println(cartItems);
                 for (CartItem item: cartItems){
 
                     Long exist = cartItemRepository.findAllByItemAndSpecialInstruction(username, item.getItem(), item.getSpecialInstruction());
 
                     if (exist != null){
-                        System.out.println("Found Duplicate: " + cartItemRepository.findById(exist));
+//                        System.out.println("Found Duplicate: " + cartItemRepository.findById(exist));
 
                         CartItem currentItem = cartItemRepository.findById(exist).get();
                         currentItem.setQuantity(currentItem.getQuantity() + item.getQuantity());
@@ -291,7 +256,7 @@ public class CartServiceImpl implements CartService{
                         cartItemRepository.saveAndFlush(item);
                     }
                 }
-                System.out.println("Test: " + cartItems);
+//                System.out.println("Test: " + cartItems);
                 deleteCartItems(cartId);
 
 
@@ -322,12 +287,6 @@ public class CartServiceImpl implements CartService{
         cartItemRepository.deleteAll(items);
 
         cartRepository.delete(cart);
-
-
-
-
-
-
     }
 
     public void deleteCart(String cartId){

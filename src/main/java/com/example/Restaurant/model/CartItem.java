@@ -29,6 +29,9 @@ public class CartItem {
 
     private String specialInstruction;
 
+    private boolean orderPlaced;
+
+
     public CartItem(Long id, String orderName, double orderPrice, int quantity, Menu item, String specialInstruction) {
         this.id = id;
         this.orderName = orderName;
@@ -36,6 +39,7 @@ public class CartItem {
         this.quantity = quantity;
         this.item = item;
         this.specialInstruction = specialInstruction;
+        this.orderPlaced = false;
     }
 
     public CartItem() {
@@ -46,32 +50,40 @@ public class CartItem {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getOrderName() {
         return orderName;
+    }
+
+    public void setOrderName(String orderName) {
+        this.orderName = orderName;
     }
 
     public double getOrderPrice() {
         return orderPrice;
     }
 
+    public void setOrderPrice(double orderPrice) {
+        this.orderPrice = orderPrice;
+    }
+
     public int getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public Menu getItem() {
         return item;
     }
 
-    public String getSpecialInstruction() {
-        return specialInstruction;
-    }
-
-    public void setOrderPrice(double orderPrice) {
-        this.orderPrice = orderPrice;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setItem(Menu item) {
+        this.item = item;
     }
 
     public String getCartId() {
@@ -82,28 +94,20 @@ public class CartItem {
         this.cartId = cartId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setOrderName(String orderName) {
-        this.orderName = orderName;
-    }
-
-    public void setOrderPrice(Double orderPrice) {
-        this.orderPrice = orderPrice;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setItem(Menu item) {
-        this.item = item;
+    public String getSpecialInstruction() {
+        return specialInstruction;
     }
 
     public void setSpecialInstruction(String specialInstruction) {
         this.specialInstruction = specialInstruction;
+    }
+
+    public boolean isOrderPlaced() {
+        return orderPlaced;
+    }
+
+    public void setOrderPlaced(boolean orderPlaced) {
+        this.orderPlaced = orderPlaced;
     }
 
     @Override
@@ -116,6 +120,7 @@ public class CartItem {
                 ", item=" + item +
                 ", cartId='" + cartId + '\'' +
                 ", specialInstruction='" + specialInstruction + '\'' +
+                ", orderPlaced=" + orderPlaced +
                 '}';
     }
 }

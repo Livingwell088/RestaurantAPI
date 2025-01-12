@@ -5,9 +5,7 @@ import com.example.Restaurant.model.Cart;
 import com.example.Restaurant.model.CartItem;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class CartController {
     @GetMapping(path = "/getCarts/{sessionId}")
     public List<CartItem> getAllCarts(@PathVariable String sessionId){
 
-        return cartService.getAllCarts(sessionId);
+        return cartService.getCartItems(sessionId);
     }
 
     @GetMapping(path = "/getAllItems")
@@ -40,19 +38,14 @@ public class CartController {
     @PostMapping(path = "/add")
 //    @ResponseStatus(HttpStatus.CREATED)
     public String addCart(@RequestBody CartItem item) {
-        return cartService.addToCart(item).getCart_Id();
+        return cartService.addItemToCart(item).getCart_Id();
     }
 
 
     @PutMapping(path = "/{cartId}")
     public void editCart(@PathVariable String cartId, @RequestBody CartItem item) {
-//        if (!cartId.equals(cart.getCart_Id())) {
-//            throw new ResponseStatusException(HttpStatus.CONFLICT,
-//                    "cartId in request URL and cartId in object body do not match");
-//        }
-//
-//        System.out.println("Editing CART!");
-        cartService.update(item);
+
+        cartService.updateCartItem(item);
     }
 
     @PostMapping(path = "cartLogin/{username}")
@@ -71,14 +64,14 @@ public class CartController {
 
     @GetMapping(path = "/{id}")
     public Cart getCart(@PathVariable String id) {
-        return cartService.getById(id).orElseThrow(() -> new EntityNotFoundException(
+        return cartService.getCartById(id).orElseThrow(() -> new EntityNotFoundException(
                 String.format("Error: Project with id %d not found.", id)));
     }
 
 
     @PostMapping(path ="/delete")
     public void deleteCarts(@RequestBody CartItem item) {
-        cartService.deleteCarts(item);
+        cartService.deleteCartItem(item);
     }
 
     @PostMapping(path = "/deleteCart/{cartId}")
