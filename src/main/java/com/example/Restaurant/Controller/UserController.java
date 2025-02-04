@@ -23,6 +23,11 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping(path = "/getUser/{userId}")
+    public StoreUser getUserById(@PathVariable String userId){
+        return userService.getUserById(userId);
+    }
+
 
     @PostMapping(path = "/add")
     public String addUser(@RequestBody StoreUser storeUser) {
@@ -36,6 +41,11 @@ public class UserController {
 //        System.out.println(pass);
 
         return userService.validateUser(storeUser.getUsernameId(), storeUser.getPassword());
+    }
+
+    @PostMapping(path = "/delete/{userId}")
+    public void deleteUser(@PathVariable String  userId){
+        userService.deleteUserById(userId);
     }
 
 

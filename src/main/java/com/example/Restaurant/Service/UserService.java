@@ -13,4 +13,7 @@ public interface UserService {
 
     public String validateUser(String user, String pass);
 
+    public StoreUser getUserById(String id);
+
+    public void deleteUserById(String id);
 }

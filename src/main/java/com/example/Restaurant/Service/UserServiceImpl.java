@@ -1,7 +1,9 @@
 package com.example.Restaurant.Service;
 
 import com.example.Restaurant.Repository.UserRepository;
+import com.example.Restaurant.model.Cart;
 import com.example.Restaurant.model.StoreUser;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,6 +58,24 @@ public class UserServiceImpl implements UserService {
                 return "Match";
             }
         }
+    }
+
+    @Override
+    public StoreUser getUserById(String id) {
+
+        if (userRepository.findById(id).isEmpty()){
+            return new StoreUser();
+        }
+        return userRepository.findById(id).get();
+    }
+
+    @Override
+    public void deleteUserById(String id) {
+
+        if (userRepository.existsById(id)){
+            userRepository.deleteById(id);
+        }
+
     }
 
 
