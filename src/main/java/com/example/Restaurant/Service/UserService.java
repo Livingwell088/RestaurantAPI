@@ -16,4 +16,6 @@ public interface UserService {
     public StoreUser getUserById(String id);
 
     public void deleteUserById(String id);
+
+    public void deleteAllUsers();
 }

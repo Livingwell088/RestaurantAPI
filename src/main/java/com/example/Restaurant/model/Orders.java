@@ -27,20 +27,24 @@ public class Orders {
     @JoinColumn(name = "user_id")
     private StoreUser user;
 
+
+    private String phoneNumber;
+
     @OneToMany
     private List<CartItem> items;
 
-    public Orders(Long id, String orderName, double orderPrice, String orderType, String address, StoreUser user, List<CartItem> items) {
+    public Orders() {
+    }
+
+    public Orders(Long id, String orderName, double orderPrice, String orderType, String address, StoreUser user, String phoneNumber, List<CartItem> items) {
         this.id = id;
         this.orderName = orderName;
         this.orderPrice = orderPrice;
         this.orderType = orderType;
         this.address = address;
         this.user = user;
+        this.phoneNumber = phoneNumber;
         this.items = items;
-    }
-
-    public Orders() {
     }
 
     public Long getId() {
@@ -91,6 +95,14 @@ public class Orders {
         this.user = user;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public List<CartItem> getItems() {
         return items;
     }
@@ -108,6 +120,7 @@ public class Orders {
                 ", orderType='" + orderType + '\'' +
                 ", address='" + address + '\'' +
                 ", user=" + user +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", items=" + items +
                 '}';
     }

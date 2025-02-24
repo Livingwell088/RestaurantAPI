@@ -48,5 +48,10 @@ public class UserController {
         userService.deleteUserById(userId);
     }
 
+    @PostMapping(path = "/deleteAll")
+    public void deleteAllUsers(){
+        userService.deleteAllUsers();
+    }
+
 
 }

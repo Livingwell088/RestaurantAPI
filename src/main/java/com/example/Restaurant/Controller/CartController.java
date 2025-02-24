@@ -74,10 +74,15 @@ public class CartController {
         cartService.deleteCartItem(item);
     }
 
+    @PostMapping(path = "/deleteById/{cartItemId}")
+    public void deleteCartItemById(@PathVariable String cartItemId){
+        cartService.deleteCartItemById(cartItemId);
+    }
+
     @PostMapping(path = "/deleteCart/{cartId}")
     public void deleteCart(@PathVariable String cartId){
 
-        cartService.deleteCartItems(cartId);
+        cartService.deleteCartItemsInCart(cartId);
 //        cartService.deleteCart(cartId);
     }
 

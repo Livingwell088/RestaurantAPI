@@ -33,7 +33,9 @@ public interface CartService {
     public List<Cart> getAll();
 
 
-    public void deleteCartItems(String cartId);
+    public void deleteCartItemsInCart(String cartId);
+
+    public void deleteCartItemById(String cartItemId);
 
     public void deleteCart(String cartId);
 

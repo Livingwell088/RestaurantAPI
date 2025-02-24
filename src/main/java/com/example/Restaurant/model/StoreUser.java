@@ -26,6 +26,10 @@ public class StoreUser {
 
     private String email;
 
+    private boolean guest;
+
+
+
 
     public StoreUser() {
 
@@ -35,22 +39,22 @@ public class StoreUser {
         this.password = password;
     }
 
-    public StoreUser(String usernameId, String password, String firstName, String lastName, String email) {
+
+    public StoreUser(String usernameId, String password, String firstName, String lastName, String email, boolean guest) {
         this.usernameId = usernameId;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.guest = guest;
     }
-
-
 
     public String getUsernameId() {
         return usernameId;
     }
 
-    public void setUsernameId(String username) {
-        this.usernameId = username;
+    public void setUsernameId(String usernameId) {
+        this.usernameId = usernameId;
     }
 
     public String getPassword() {
@@ -85,15 +89,23 @@ public class StoreUser {
         this.email = email;
     }
 
+    public boolean isGuest() {
+        return guest;
+    }
+
+    public void setGuest(boolean guest) {
+        this.guest = guest;
+    }
 
     @Override
     public String toString() {
-        return "User{" +
-                "username='" + usernameId + '\'' +
+        return "StoreUser{" +
+                "usernameId='" + usernameId + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", guest=" + guest +
                 '}';
     }
 }

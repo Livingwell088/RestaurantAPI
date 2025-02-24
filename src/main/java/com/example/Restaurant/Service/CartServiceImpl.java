@@ -257,7 +257,7 @@ public class CartServiceImpl implements CartService{
                     }
                 }
 //                System.out.println("Test: " + cartItems);
-                deleteCartItems(cartId);
+                deleteCartItemsInCart(cartId);
 
 
                 newCart.setCartItems(cartItemRepository.findAllByCartId(username));
@@ -275,7 +275,7 @@ public class CartServiceImpl implements CartService{
     }
 
 
-    public void deleteCartItems(String cartId){
+    public void deleteCartItemsInCart(String cartId){
 
         Cart cart = cartRepository.findById(cartId)
                 .orElseThrow(() -> new IllegalArgumentException("Cart not found"));
@@ -287,6 +287,39 @@ public class CartServiceImpl implements CartService{
         cartItemRepository.deleteAll(items);
 
         cartRepository.delete(cart);
+    }
+
+    @Override
+    public void deleteCartItemById(String cartItemId) {
+//        cartItemRepository.deleteById(Long.parseLong(cartItemId));
+
+        CartItem item = cartItemRepository.findById(Long.parseLong(cartItemId)).get();
+
+        String cartId = item.getCartId();
+        Cart cart = getCartById(cartId).orElseThrow(() -> new EntityNotFoundException(
+                String.format("Carts with id %d not found.", cartId)));
+
+        Long currentId = cartItemRepository.findAllByItemAndSpecialInstruction(cartId, item.getItem(), item.getSpecialInstruction());
+        CartItem current = cartItemRepository.getById(currentId);
+
+        if (current.getQuantity() == 1){
+            cart.getCartItems().remove(current);
+            cartItemRepository.deleteById(currentId);
+
+        }
+        else{
+            current.setQuantity(current.getQuantity() - 1);
+            current.setOrderPrice(current.getQuantity() * Double.parseDouble(current.getItem().getPrice()));
+
+            cartItemRepository.flush();
+        }
+
+
+        cartRepository.flush();
+
+
+
+
     }
 
     public void deleteCart(String cartId){
