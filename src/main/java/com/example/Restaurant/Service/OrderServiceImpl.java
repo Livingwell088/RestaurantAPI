@@ -5,15 +5,11 @@ import com.example.Restaurant.Repository.CartRepository;
 import com.example.Restaurant.Repository.OrderRepository;
 import com.example.Restaurant.Repository.UserRepository;
 import com.example.Restaurant.model.*;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -56,7 +52,8 @@ public class OrderServiceImpl implements OrderService{
         System.out.println(orders);
 
         orderRepository.saveAndFlush(orders);
-        return new Orders();
+//        return new Orders();
+        return orders;
     }
 
     @Override
@@ -80,6 +77,13 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public void deleteAll() {
         orderRepository.deleteAll();
+    }
+
+
+//    @Override
+    public List<Orders> getOrdersByUser(StoreUser user) {
+
+        return orderRepository.findAllByUser(user);
     }
 
 
