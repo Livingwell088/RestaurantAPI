@@ -46,8 +46,14 @@ public class OrderServiceImpl implements OrderService{
             cartItemRepository.saveAndFlush(item);
         }
 
-//        System.out.println("orderItems: " + orderItems.toString());
-//        System.out.println("Order.getItems(): " + orders.getItems().toString());
+        System.out.println(orders);
+
+        String orderName = orders.getOrderName();
+        int number = orderRepository.findAllByDatePlaced(orders.getDatePlaced()).size();
+
+        orderName += "-" + String.valueOf(number);
+
+        orders.setOrderName(orderName);
 
         System.out.println(orders);
 
