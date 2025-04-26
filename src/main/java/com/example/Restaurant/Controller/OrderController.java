@@ -1,6 +1,7 @@
 package com.example.Restaurant.Controller;
 
 import com.example.Restaurant.Service.CartService;
+import com.example.Restaurant.Service.EmailService;
 import com.example.Restaurant.Service.OrderService;
 import com.example.Restaurant.model.Cart;
 import com.example.Restaurant.model.Orders;
