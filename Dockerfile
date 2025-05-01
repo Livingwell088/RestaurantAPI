@@ -1,14 +1,22 @@
 
 # Use a base image with Java 17
-FROM openjdk:17-jdk-slim
-
-# Copy the built jar file into the image
-#COPY build/libs/*.jar app.jar
+#FROM openjdk:17-jdk-slim
 #
-# Set the entry point to run your application
+#ARG JAR_FILE=target/*.jar
+#COPY ${JAR_FILE} app.jar
 #ENTRYPOINT ["java","-jar","/app.jar"]
 
-#FROM openjdk:8-jdk-alpine
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+# Use a base image with Java 17
+FROM openjdk:17-jdk-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the JAR file into the container
+COPY target/*.jar app.jar
+
+# Expose the port the app runs on (default Spring Boot port is 8080)
+EXPOSE 8080
+
+# Command to execute the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
