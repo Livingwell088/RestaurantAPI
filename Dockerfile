@@ -7,7 +7,7 @@
 #ENTRYPOINT ["java","-jar","/app.jar"]
 
 # Use a base image with Java 17
-FROM openjdk:17-jdk-slim
+FROM openjdk:17-jdk-alpine
 
 # Set the working directory inside the container
 WORKDIR /app
