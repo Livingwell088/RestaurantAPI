@@ -38,7 +38,7 @@ public class MenuController {
 
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new FileReader("C:/Users/nickl/OneDrive/Desktop/Personal Projects/Rest/RestaurantAPI/src/main/java/com/example/Restaurant/data/menu.csv"));
+            reader = new BufferedReader(new FileReader("C:/Users/nickl/OneDrive/Desktop/Personal Projects/Rest/RestaurantAPI/src/main/java/com/example/Restaurant/data/menu1.csv"));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

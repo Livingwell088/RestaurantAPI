@@ -122,26 +122,46 @@ public class CartServiceImpl implements CartService{
     @Override
     public Cart updateCartItem(CartItem item) {
 
-//        System.out.println("EDIT");
-
-        cartItemRepository.saveAndFlush(item);
-        List<CartItem> items = cartItemRepository.findAllByCartId(item.getCartId());
-
-//        System.out.println(items);
+        System.out.println(item.toString());
 
 
-        Optional<Cart> cart = cartRepository.findById(item.getCartId());
-        cart = cartRepository.findById(item.getCartId());
+//        cartItemRepository.saveAndFlush(item);
+//        List<CartItem> items = cartItemRepository.findAllByCartId(item.getCartId());
+//
+//
+//        Optional<Cart> cart = cartRepository.findById(item.getCartId());
+//        cart = cartRepository.findById(item.getCartId());
+//
+//        Cart newCart = cart.get();
+//        newCart.setCartItems(items);
+//
+//
+//
+//        cartRepository.saveAndFlush(newCart);
+//        return new Cart();
 
-        Cart newCart = cart.get();
-        newCart.setCartItems(items);
+//        deleteCartItemById(String.valueOf(item.getId()));
 
-//        System.out.println(newCart.getCartItems());
+        CartItem currentItem = cartItemRepository.findById(item.getId()).get();
+
+        String cartId = item.getCartId();
+        Cart cart = getCartById(cartId).orElseThrow(() -> new EntityNotFoundException(
+                String.format("Carts with id %d not found.", cartId)));
+
+        Long currentId = cartItemRepository.findAllByItemAndSpecialInstruction(cartId, currentItem.getItem(), item.getSpecialInstruction());
+        CartItem current = cartItemRepository.getById(currentId);
+        cart.getCartItems().remove(current);
+        cartItemRepository.deleteById(currentId);
 
 
+        if (item.getQuantity() > 0){
+            addItemToCart(item);
+        }
 
-        cartRepository.saveAndFlush(newCart);
         return new Cart();
+
+
+
     }
 
 
