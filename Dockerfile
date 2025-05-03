@@ -14,8 +14,7 @@
 #ENTRYPOINT ["java", "-jar", "app.jar"]
 
 
-
-FROM maven:3.8.1-jdk-17 AS builder
+FROM maven:4.0.0-jdk-17 AS builder
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
