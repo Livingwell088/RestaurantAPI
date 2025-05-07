@@ -14,13 +14,3 @@ COPY ./target/Restaurant-0.0.1-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
 
 
-#FROM maven:4.0.0-jdk-17 AS builder
-#WORKDIR /app
-#COPY pom.xml .
-#COPY src ./src
-#RUN mvn clean package -DskipTests
-
-#FROM openjdk:21
-#WORKDIR /app
-#COPY --from=builder /app/target/*.jar /app/my-app.jar
-#CMD ["java", "-jar", "my-app.jar"]
